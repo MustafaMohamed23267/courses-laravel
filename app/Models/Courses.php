@@ -13,13 +13,11 @@ class Courses extends Model
         'title',
         'description',
         'image_url',
-        'price',
         'level',
         'total_seats',
         'available_seats',
         'rating',
         'duration',
-
         'category_id'
     ];
 

@@ -11,7 +11,7 @@ class StoreCoursesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,13 +23,15 @@ class StoreCoursesRequest extends FormRequest
     {
         return [
              'title'=>['required', 'string', 'max:255'],
-            'image_url'=>['required', 'string'],
+            'image_url'=>['required'],
             'description'=>['required', 'string'],
             'level'=>['required','max:255'],
             'total_seats'=>['required','max:255'],
             'available_seats'=>['required','max:255'],
             'rating'=>['nullable','max:255'],
             'duration'=>['nullable','max:255'],
+            'category_id' => 'required|exists:categories,id'
+
         ];
     }
 }

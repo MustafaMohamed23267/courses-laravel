@@ -221,12 +221,531 @@
                     }
                 ]
             }
+        },
+        "/api/courses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get all courses",
+                "operationId": "a111247eb122c574b1bdf2bfec710c8a",
+                "responses": {
+                    "200": {
+                        "description": "Courses retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Laravel Basics"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Learn Laravel from scratch"
+                                            },
+                                            "level": {
+                                                "type": "string",
+                                                "example": "Beginner"
+                                            },
+                                            "total_seats": {
+                                                "type": "integer",
+                                                "example": 20
+                                            },
+                                            "available_seats": {
+                                                "type": "integer",
+                                                "example": 20
+                                            },
+                                            "rating": {
+                                                "type": "number",
+                                                "example": 4.5
+                                            },
+                                            "duration": {
+                                                "type": "string",
+                                                "example": "3 hours"
+                                            },
+                                            "category_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "image_url": {
+                                                "type": "string",
+                                                "example": "courses/image.jpg"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Request failed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Create a new course",
+                "operationId": "b0442045a77247128649ebcb0c3526a9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "level",
+                                    "total_seats",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Basics"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Learn Laravel from scratch"
+                                    },
+                                    "level": {
+                                        "type": "string",
+                                        "example": "Beginner"
+                                    },
+                                    "total_seats": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "example": 4.5
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "example": "3 hours"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "image_url": {
+                                        "description": "Course image file",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Course created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Basics"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Learn Laravel from scratch"
+                                        },
+                                        "level": {
+                                            "type": "string",
+                                            "example": "Beginner"
+                                        },
+                                        "total_seats": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "available_seats": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "rating": {
+                                            "type": "number",
+                                            "example": 4.5
+                                        },
+                                        "duration": {
+                                            "type": "string",
+                                            "example": "3 hours"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "image_url": {
+                                            "type": "string",
+                                            "example": "courses/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Request failed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/courses/{id}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get single course",
+                "operationId": "7ac45a2b23af6d0091beec3d2ac4c4a6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Course ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Basics"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Learn Laravel from scratch"
+                                        },
+                                        "level": {
+                                            "type": "string",
+                                            "example": "Beginner"
+                                        },
+                                        "total_seats": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "available_seats": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "rating": {
+                                            "type": "number",
+                                            "example": 4.5
+                                        },
+                                        "duration": {
+                                            "type": "string",
+                                            "example": "3 hours"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "image_url": {
+                                            "type": "string",
+                                            "example": "courses/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Course not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Update a course",
+                "operationId": "998b2cdbcbb031a5a4d359e9f4390825",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Course ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "_method": {
+                                        "description": "HTTP method override",
+                                        "type": "string",
+                                        "example": "PUT"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Advanced"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Advanced Laravel concepts"
+                                    },
+                                    "level": {
+                                        "type": "string",
+                                        "example": "Intermediate"
+                                    },
+                                    "total_seats": {
+                                        "type": "integer",
+                                        "example": 25
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "example": 4.7
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "example": "5 hours"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "image_url": {
+                                        "description": "Course image file (optional)",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Course updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Advanced"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Advanced Laravel concepts"
+                                        },
+                                        "level": {
+                                            "type": "string",
+                                            "example": "Intermediate"
+                                        },
+                                        "total_seats": {
+                                            "type": "integer",
+                                            "example": 25
+                                        },
+                                        "available_seats": {
+                                            "type": "integer",
+                                            "example": 20
+                                        },
+                                        "rating": {
+                                            "type": "number",
+                                            "example": 4.7
+                                        },
+                                        "duration": {
+                                            "type": "string",
+                                            "example": "5 hours"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": 2
+                                        },
+                                        "image_url": {
+                                            "type": "string",
+                                            "example": "courses/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Course not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Request failed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Delete a course",
+                "operationId": "5b48065615169c1d8c0dc94a0bf8815c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Course ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Course not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Authentication",
             "description": "Authentication endpoints"
+        },
+        {
+            "name": "Courses",
+            "description": "Endpoints for managing courses"
         }
     ]
 }
