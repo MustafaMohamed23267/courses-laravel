@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Courses extends Model
+class courses extends Model
 {
     /** @use HasFactory<\Database\Factories\CoursesFactory> */
     use HasFactory;
@@ -14,11 +14,12 @@ class Courses extends Model
         'description',
         'image_url',
         'level',
-        'total_seats',
-        'available_seats',
+        'videos',
+        'requirements',
         'rating',
         'duration',
-        'category_id'
+        'category_id',
+        'instructor_id',
     ];
 
     /**
@@ -26,12 +27,26 @@ class Courses extends Model
      */
 
 
+    public function instructor()
+    {
+        return $this->belongsTo(User::class, 'instructor_id')->wherein('role', ['instructor ' , 'admin']);
+    } 
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function booking()
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+      public function users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'bookings',      // pivot table
+            'course_id',     // foreign key in bookings
+            'user_id'        // foreign key in bookings
+        );
     }
 }

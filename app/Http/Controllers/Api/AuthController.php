@@ -147,8 +147,9 @@ class AuthController extends Controller
             $token = $user->createToken('auth-token')->plainTextToken;
 
             return ApiResponse::success([
+                'token' => $token,
                 'user' => new UserResource($user),
-                'token' => $token
+                
             ], 'Registration successful', 201);
         } catch (Exception $e) {
             return ApiResponse::error('Request failed', ['message' => $e->getMessage()], 400);

@@ -30,8 +30,8 @@ class CoursesFactory extends Factory
 
             'image_url' => $this->faker->imageUrl(640, 480, 'courses', true),
             'level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced']),
-            'total_seats' => $this->faker->numberBetween(10, 100),
-            'available_seats' => $this->faker->numberBetween(0, 100),
+            'videos' => $this->faker->numberBetween(10, 100),
+            'requirements' => $this->faker->paragraph(4),
             'rating' => $this->faker->numberBetween(0, 5),
             'duration' => $this->faker->numberBetween(1, 20) . ' hours',
 

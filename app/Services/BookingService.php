@@ -23,41 +23,41 @@ class BookingService
      * @param int $courseId
      * @return Booking|null
      */
-    public function createBooking(int $courseId): ?Booking
-    {
-        return DB::transaction(function () use ($courseId) {
-            // Check if course exists and has available seats
-            $course = Courses::find($courseId);
+    // public function createBooking(int $courseId): ?Booking
+    // {
+    //     return DB::transaction(function () use ($courseId) {
+    //         // Check if course exists and has available seats
+    //         $course = Courses::find($courseId);
 
-            if (!$course) {
-                throw new \Exception('Course not found');
-            }
+    //         if (!$course) {
+    //             throw new \Exception('Course not found');
+    //         }
 
-            if ($course->available_seats <= 0) {
-                throw new \Exception('No available seats for this course');
-            }
+    //         if ($course->available_seats <= 0) {
+    //             throw new \Exception('No available seats for this course');
+    //         }
 
-            // Check if user already booked this course
-            $existingBooking = Booking::where('user_id', Auth::id())
-                ->where('course_id', $courseId)
-                ->first();
+    //         // Check if user already booked this course
+    //         $existingBooking = Booking::where('user_id', Auth::id())
+    //             ->where('course_id', $courseId)
+    //             ->first();
 
-            if ($existingBooking) {
-                throw new \Exception('You have already booked this course');
-            }
+    //         if ($existingBooking) {
+    //             throw new \Exception('You have already booked this course');
+    //         }
 
-            // Reduce available seats
-            if (!$this->courseService->reduceSeats($courseId, 1)) {
-                throw new \Exception('Failed to book course');
-            }
+    //         // Reduce available seats
+    //         if (!$this->courseService->reduceSeats($courseId, 1)) {
+    //             throw new \Exception('Failed to book course');
+    //         }
 
-            // Create booking
-            return Booking::create([
-                'user_id' => Auth::id(),
-                'course_id' => $courseId
-            ]);
-        });
-    }
+    //         // Create booking
+    //         return Booking::create([
+    //             'user_id' => Auth::id(),
+    //             'course_id' => $courseId
+    //         ]);
+    //     });
+    // }
 
     /**
      * Get a booking by ID

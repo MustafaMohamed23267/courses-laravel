@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
              $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('image_url');
             $table->string('level');
-            $table->string('total_seats');
-            $table->string('available_seats');
+            $table->string('videos');
+            $table->text('requirements');
             $table->string('rating')->default(0)->nullable();
             $table->string('duration')->nullable();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id') ->constrained()->cascadeOnDelete();
+            $table->foreignId('instructor_id')
+                    ->constrained('users')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

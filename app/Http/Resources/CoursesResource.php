@@ -20,14 +20,19 @@ class CoursesResource extends JsonResource
             'description' => $this->description,
             'image_url' => $this->image_url ? asset('storage/' . $this->image_url) : null,
             'level' => $this->level,
-            'total_seats' => $this->total_seats,
-            'available_seats' => $this->available_seats,
+            'videos' => $this->videos,
+            'requirements' => $this->requirements,
             'rating' => $this->rating,
             'duration' => $this->duration,
             'category' => $this->category ? [
                 'id' => $this->category->id,
                 'name' => $this->category->name
             ] : null,
+            'instructor' => $this->instructor ? [
+            'id' => $this->instructor->id,
+            'name' => $this->instructor->name,
+            'email' => $this->instructor->email,
+             ] : null,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
         ];

@@ -24,10 +24,10 @@ class StoreCoursesRequest extends FormRequest
         return [
              'title'=>['required', 'string', 'max:255'],
             'image_url'=>['required'],
-            'description'=>['required', 'string'],
+            'description'=>['required'],
             'level'=>['required','max:255'],
-            'total_seats'=>['required','max:255'],
-            'available_seats'=>['required','max:255'],
+            'videos'=>['required','max:255'],
+            'requirements'=>['required','max:255'],
             'rating'=>['nullable','max:255'],
             'duration'=>['nullable','max:255'],
             'category_id' => 'required|exists:categories,id'

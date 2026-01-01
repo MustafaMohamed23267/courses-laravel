@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Category;
 use Exception;
 use App\Models\Courses;
 use App\Helper\ApiResponse;
@@ -72,6 +73,7 @@ class CoursesController extends Controller
             return ApiResponse::error('Request failed', ['message' => $e->getMessage()], 400);
         }
     }
+
 
     #[OA\Get(
         path: "/api/courses/{id}",

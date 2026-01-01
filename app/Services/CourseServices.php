@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Booking;
 use App\Models\Courses;
 use App\Http\Requests\StorecoursesRequest;
 use App\Http\Requests\UpdateCoursesRequest;
@@ -20,7 +21,7 @@ class CourseServices
     public function createCourse(StorecoursesRequest $request): Courses
     {
         $data = $request->validated();
-        $data['user_id'] = Auth::id();
+        $data['instructor_id'] = Auth::id();
 
         if ($request->hasFile('image_url')) {
             $data['image_url'] = $request->file('image_url')
@@ -38,6 +39,9 @@ class CourseServices
      */
     public function getCourse(int $id): ?Courses
     {
+    //     $enrolled = Booking::where('user_id', auth()->id())
+    // ->where('course_id', $course->id)
+    // ->exists();
         return Courses::find($id);
     }
 
@@ -48,6 +52,8 @@ class CourseServices
      */
     public function getAllCourses(): Collection
     {
+           // return Courses::with('category')->get();
+
         return Courses::all();
     }
 

@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
-    /** @use HasFactory<\Database\Factories\BookingFactory> */
-    use HasFactory;
+    
 
 
         protected $fillable = [
@@ -27,7 +26,7 @@ class Booking extends Model
 
     public function course()
     {
-        return $this->belongsTo(courses::class);
+        return $this->belongsTo(Courses::class);
     }
 
 }
