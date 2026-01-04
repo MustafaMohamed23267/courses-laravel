@@ -76,7 +76,7 @@ class CoursesController extends Controller
         // ADMIN
         if ($user->role === 'admin') {
             return response()->json([
-                'courses' => Courses::with('category', 'user')->get(),
+                'courses' => Courses::all(),
             ]);
         }
 
