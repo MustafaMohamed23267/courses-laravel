@@ -74,11 +74,11 @@ class CoursesController extends Controller
         }
 
         // ADMIN
-        if ($user->role === 'admin') {
-            return response()->json([
-                'courses' => Courses::all(),
-            ]);
-        }
+       if ($user->role === 'admin') {
+        return response()->json([
+            'courses' => Courses::with('category', 'instructor')->get(),
+        ]);
+}
 
         // INSTRUCTOR
         if ($user->role === 'instructor') {

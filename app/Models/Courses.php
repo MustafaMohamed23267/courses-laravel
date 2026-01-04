@@ -28,9 +28,10 @@ class courses extends Model
 
 
     public function instructor()
-    {
-        return $this->belongsTo(User::class, 'instructor_id')->wherein('role', ['instructor ' , 'admin']);
-    } 
+{
+    return $this->belongsTo(User::class, 'instructor_id');
+}
+
 
     public function category()
     {
