@@ -77,6 +77,7 @@ class CoursesController extends Controller
        if ($user->role === 'admin') {
         return response()->json([
             'courses' => Courses::with('category', 'instructor')->get(),
+            'allcourses' => Courses::with('category', 'instructor')->get(),
         ]);
 }
 
@@ -84,6 +85,7 @@ class CoursesController extends Controller
         if ($user->role === 'instructor') {
             return response()->json([
                 'courses' => $user->courses()->with('category')->get(),
+                'allcourses' => Courses::with('category', 'instructor')->get(),
             ]);
         }
 
@@ -91,6 +93,7 @@ class CoursesController extends Controller
         if ($user->role === 'instructor') {
         return response()->json([
             'courses' => $user->enrolledCourses()->with('category')->get(),
+            'allcourses' => Courses::with('category', 'instructor')->get(),
         ]);}
 
          return response()->json([
