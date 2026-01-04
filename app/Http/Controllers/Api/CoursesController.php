@@ -66,10 +66,34 @@ class CoursesController extends Controller
     )]
     public function index()
     {
-        try {
-            $courses = $this->courseService->getAllCourses();
-            return ApiResponse::success(CoursesResource::collection($courses), 'Courses retrieved successfully');
-        } catch (Exception $e) {
+       try {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
+        // ADMIN
+        if ($user->role === 'admin') {
+            return response()->json([
+                'courses' => Courses::with('category', 'user')->get(),
+            ]);
+        }
+
+        // INSTRUCTOR
+        if ($user->role === 'instructor') {
+            return response()->json([
+                'courses' => $user->courses()->with('category')->get(),
+            ]);
+        }
+
+        // STUDENT
+        return response()->json([
+            'courses' => $user->enrolledCourses()->with('category')->get(),
+        ]);
+
+    }
+         catch (Exception $e) {
             return ApiResponse::error('Request failed', ['message' => $e->getMessage()], 400);
         }
     }
