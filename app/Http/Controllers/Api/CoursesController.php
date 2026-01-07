@@ -84,7 +84,7 @@ class CoursesController extends Controller
         // INSTRUCTOR
         if ($user->role === 'instructor') {
             return response()->json([
-                'courses' => $user->courses()->with(['users:id,name', 'category'])->get(),
+                'courses' => $user->courses()->with(['users:id,name', 'category'])->withCount('users')->get(),
                 'allcourses' => Courses::with('category', 'instructor')->get(),
             ]);
         }
