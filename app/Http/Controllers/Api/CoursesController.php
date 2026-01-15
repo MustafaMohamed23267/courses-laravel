@@ -92,7 +92,7 @@ class CoursesController extends Controller
         // STUDENT
         if ($user->role === 'student') {
         return response()->json([
-            'courses' => $user->enrolledCourses()->with('category')->get(),
+            'courses' => $user->enrolledCourses()->with(['category', 'instructor'])->get(),
             'allcourses' => Courses::with('category', 'instructor')->get(),
         ]);}
 
